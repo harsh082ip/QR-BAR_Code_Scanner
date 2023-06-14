@@ -9,16 +9,23 @@ class Scanner extends StatefulWidget {
 }
 
 class _ScannerState extends State<Scanner> {
+  // barcode
   Future<void> barcode() async {
     String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
         '#ff6666', 'CANCEL', true, ScanMode.BARCODE);
+    value = barcodeScanRes;
+    setState(() {});
   }
 
+  // qr code
   Future<void> qrcode() async {
     String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
         '#ff6666', 'CANCEL', true, ScanMode.QR);
+    value = barcodeScanRes;
+    setState(() {});
   }
 
+  var value = 'result';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +55,7 @@ class _ScannerState extends State<Scanner> {
               },
               child: Text('QR-code Scanner', style: TextStyle(fontSize: 25.0)),
             ),
-            Text('result', style: TextStyle(fontSize: 25.0)),
+            SelectableText(value, style: TextStyle(fontSize: 25.0)),
           ],
         ),
       ),
